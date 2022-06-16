@@ -1,5 +1,11 @@
 const express = require('express')
+
+// ********
+const bodyParser = require("body-parser");
+
+
 app = express()
+app.use(bodyParser.urlencoded({extended: true}));
 
 var url = require('url');
 var dt = require('./date-time');
@@ -20,6 +26,32 @@ app.get('/mongo', (request, response) => {
 	response.type('text/plain')
 	response.send('Mongo version 2 port='+port)
 })
+
+app.get('/mongo-index', (request, response) => {
+	console.log('Calling "/mongo-index" on the Node.js server.')
+	response.sendFile(__dirname + "/mongo-index.html");
+})
+
+app.post("/", function(req, res){
+	console.log('post 2')
+	console.log("title="+req.body.title)
+	console.log("content="+req.body.content)
+	// console.log(req)
+
+
+	/*
+	let newNote = new Note({
+		title: req.body.title,
+		content: req.body.content
+	})
+	
+	newNote.save();
+	res.redirect("/");
+	*/
+
+	res.redirect("/mongo-index");
+})
+
 
 // ********
 
