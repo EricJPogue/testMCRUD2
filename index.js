@@ -1,26 +1,22 @@
 const express = require('express')
 
-// ********
+// Start MongoDB Atlas ********
 const bodyParser = require("body-parser");
-
 const mongoose = require("mongoose");
-
-
-// ********
-
+// End MongoDB Atlas ********
 
 app = express()
 app.use(bodyParser.urlencoded({extended: true}));
 
-// ********
-const uri = "mongodb+srv://testMongoDBUserName:8L4kkR8KszHZTI7S@cluster0.fei8p8f.mongodb.net/notesDB"
-mongoose.connect(uri, {useNewUrlParser: true}, {useUnifiedTopology: true})
+// Start MongoDB Atlas ********
+const mongooseUri = "mongodb+srv://testMongoDBUserName:8L4kkR8KszHZTI7S@cluster0.fei8p8f.mongodb.net/notesDB"
+mongoose.connect(mongooseUri, {useNewUrlParser: true}, {useUnifiedTopology: true})
 const notesSchema = {
 	title: String,
 	content: String
 }
 const Note = mongoose.model("Note", notesSchema);
-
+// End MongoDB Atlas ********
 
 var url = require('url');
 var dt = require('./date-time');
@@ -32,26 +28,23 @@ const minorVersion = 2
 // Use Express to publish static HTML, CSS, and JavaScript files that run in the browser. 
 app.use(express.static(__dirname + '/static'))
 
-// ********
-
-
+// Start MongoDB Atlas ********
+/*
 app.get('/mongo', (request, response) => {
 	console.log('Calling "/mongo" on the Node.js server.')
 	console.log(port)
 	response.type('text/plain')
 	response.send('Mongo version 2 port='+port)
 })
-
+*/
+/*
 app.get('/mongo-index', (request, response) => {
 	console.log('Calling "/mongo-index" on the Node.js server.')
 	response.sendFile(__dirname + "/mongo-index.html");
 })
+*/
 
-app.post("/", function(req, res){
-	console.log('post 2')
-	console.log("title="+req.body.title)
-	console.log("content="+req.body.content)
-
+app.post("/mongo-create", function(req, res){
 	let newNote = new Note({
 		title: req.body.title,
 		content: req.body.content
@@ -62,12 +55,7 @@ app.post("/", function(req, res){
 	res.type('text/plain')
 	res.send('Saved title='+req.body.title+' and content='+req.body.content+' port='+port)
 })
-
-
-// ********
-
-
-
+// End MongoDB Atlas ********
 
 
 // The app.get functions below are being processed in Node.js running on the server.
