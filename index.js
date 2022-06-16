@@ -3,9 +3,19 @@ const express = require('express')
 // ********
 const bodyParser = require("body-parser");
 
+const mongoose = require("mongoose");
+
+
+// ********
+
 
 app = express()
 app.use(bodyParser.urlencoded({extended: true}));
+
+// ********
+const uri = "mongodb+srv://testMongoDBUserName:8L4kkR8KszHZTI7S@cluster0.fei8p8f.mongodb.net/notesDB"
+mongoose.connect(uri, {useNewUrlParser: true}, {useUnifiedTopology: true})
+
 
 var url = require('url');
 var dt = require('./date-time');
