@@ -11,6 +11,22 @@ const minorVersion = 2
 // Use Express to publish static HTML, CSS, and JavaScript files that run in the browser. 
 app.use(express.static(__dirname + '/static'))
 
+// ********
+
+
+app.get('/mongo', (request, response) => {
+	console.log('Calling "/mongo" on the Node.js server.')
+	console.log(port)
+	response.type('text/plain')
+	response.send('Mongo version 2 port='+port)
+})
+
+// ********
+
+
+
+
+
 // The app.get functions below are being processed in Node.js running on the server.
 // Implement a custom About page.
 app.get('/about', (request, response) => {
