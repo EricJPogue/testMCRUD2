@@ -15,6 +15,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 // ********
 const uri = "mongodb+srv://testMongoDBUserName:8L4kkR8KszHZTI7S@cluster0.fei8p8f.mongodb.net/notesDB"
 mongoose.connect(uri, {useNewUrlParser: true}, {useUnifiedTopology: true})
+const notesSchema = {
+	title: String,
+	content: String
+}
+const Note = mongoose.model("Note", notesSchema);
 
 
 var url = require('url');
@@ -46,20 +51,16 @@ app.post("/", function(req, res){
 	console.log('post 2')
 	console.log("title="+req.body.title)
 	console.log("content="+req.body.content)
-	// console.log(req)
 
-
-	/*
 	let newNote = new Note({
 		title: req.body.title,
 		content: req.body.content
 	})
 	
 	newNote.save();
-	res.redirect("/");
-	*/
 
-	res.redirect("/mongo-index");
+	res.type('text/plain')
+	res.send('Saved title='+req.body.title+' and content='+req.body.content+' port='+port)
 })
 
 
